@@ -1,0 +1,26 @@
+<head runat="server">
+<title></title>
+<script>
+    function addEvent(obj, type, fn) {
+        if (obj.addEventListener) {
+            obj.addEventListener(type, fn, false);
+            EventCache.add(obj, type, fn);
+        }
+        else if (obj.attachEvent) {
+            obj["e" + type + fn] = fn;
+            obj[type + fn] = function() { obj["e" + type + fn](window.event); }
+            obj.attachEvent("on" + type, obj[type + fn]);
+        }
+        else obj["on" + type] = obj["e" + type + fn];
+    }
+    function function1() {
+        alert('y');
+    }
+  </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <input id="Text1" type="text" />
+        <input id="Button1" type="button" value="button" />
+     </form>
+</body>
